@@ -1,2 +1,9 @@
 .idea/
 bin/
+
+.terraform/
+terraform.tfstate
+terraform.tfstate.backup
+
+deployment.zip
+*.log

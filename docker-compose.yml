@@ -1,0 +1,40 @@
+version: "3.8"
+
+services:
+  localstack:
+    container_name: "${LOCALSTACK_DOCKER_NAME-localstack_main}"
+    image: localstack/localstack:0.13
+#    network_mode: bridge
+    ports:
+      - "4566-4583:4566-4583"
+      - "4510:4510"
+    environment:
+      - SERVICES=${SERVICES-} # s3,iam,kms,lambda,secretsmanager,sts
+      - DEBUG=${DEBUG-1}
+      - DEFAULT_REGION=${DEAULT_REGION-us-east-1}
+      - DATA_DIR=${DATA_DIR-}
+      - LAMBDA_EXECUTOR=${LAMBDA_EXECUTOR-docker-reuse}
+      - LAMBDA_REMOTE_DOCKER=${LAMBDA_REMOTE_DOCKER-false}
+#      - LAMBDA_DOCKER_FLAGS="-p 19891:19891"
+      - HOST_TMP_FOLDER=${TMPDIR:-/tmp/}localstack
+      - DOCKER_HOST=unix:///var/run/docker.sock
+      - LAMBDA_DOCKER_NETWORK=localstack-net
+      - HOSTNAME_EXTERNAL=localstack
+    volumes:
+      - ".:/app"
+      - "${TMPDIR:-/tmp}/localstack:/tmp/localstack"
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    networks:
+      - default
+      - localstack-net
+
+#  terraform:
+#    image: hashicorp/terraform:1.1.4
+#    network_mode: host
+#    volumes:
+#      - .:/app
+
+networks:
+  localstack-net:
+    external: true
+    name: localstack-net
