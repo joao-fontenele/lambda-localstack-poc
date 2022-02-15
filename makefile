@@ -13,3 +13,8 @@ destroy:
 .PHONY: build
 build:
 	go build -o bin/main ./cmd/lambda/...
+
+.PHONY: invoke
+invoke:
+	aws --endpoint-url=http://localhost:4566 lambda invoke --function-name test-local invoke.log
+	cat invoke.log
