@@ -62,7 +62,7 @@ resource "aws_iam_role" "lambda-execution-role" {
 EOF
 }
 
-resource "aws_lambda_function" "fetcher" {
+resource "aws_lambda_function" "test" {
   s3_bucket     = "__local__"
   s3_key        = var.lambda_mount_cwd
   function_name = "test-${var.env}"
@@ -76,4 +76,8 @@ resource "aws_lambda_function" "fetcher" {
       ENV = var.env
     }
   }
+}
+
+output "lambda_arn" {
+  value = aws_lambda_function.test.arn
 }

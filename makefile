@@ -16,5 +16,5 @@ build:
 
 .PHONY: invoke
 invoke:
-	aws --endpoint-url=http://localhost:4566 lambda invoke --function-name test-local invoke.log
+	aws --endpoint-url=http://localhost:4566 lambda invoke --function-name arn:aws:lambda:us-east-1:000000000000:function:test-local invoke.log
 	cat invoke.log
