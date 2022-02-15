@@ -15,11 +15,10 @@ services:
       - DATA_DIR=${DATA_DIR-}
       - LAMBDA_EXECUTOR=${LAMBDA_EXECUTOR-docker-reuse}
       - LAMBDA_REMOTE_DOCKER=${LAMBDA_REMOTE_DOCKER-false}
-#      - LAMBDA_DOCKER_FLAGS="-p 19891:19891"
       - HOST_TMP_FOLDER=${TMPDIR:-/tmp/}localstack
       - DOCKER_HOST=unix:///var/run/docker.sock
       - LAMBDA_DOCKER_NETWORK=localstack-net
-      - HOSTNAME_EXTERNAL=localstack
+#      - HOSTNAME_EXTERNAL=localstack
     volumes:
       - ".:/app"
       - "${TMPDIR:-/tmp}/localstack:/tmp/localstack"
