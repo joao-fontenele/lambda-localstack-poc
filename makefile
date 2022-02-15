@@ -4,11 +4,11 @@ init:
 
 .PHONY: apply
 apply:
-	terraform -chdir=./infra/ apply -var="LAMBDA_MOUNT_CWD=${PWD}/bin" -auto-approve
+	terraform -chdir=./infra/ apply -var="lambda_mount_cwd=${PWD}/bin" -auto-approve
 
 .PHONY: destroy
 destroy:
-	terraform -chdir=./infra/ destroy -var="LAMBDA_MOUNT_CWD=${PWD}/bin"
+	terraform -chdir=./infra/ destroy -var="lambda_mount_cwd=${PWD}/bin"
 
 .PHONY: build
 build:
